@@ -161,7 +161,7 @@ export const Stake = ({address, setAddress, nfts, setNfts, stakedPairs, setStake
     const [filt, setFilt] = useState(JSON.stringify({dwarves: true, weapons: true}))
     const [clickedMenu, setClickedMenu] = useState(false)
     const [copied, setCopied] = useState(false)
-
+ 
     return (
         <div className={classes.root} style={{backgroundImage: `url(${bgStake})`, backgroundPosition: "top center", backgroundSize: "cover"}} onClick={() =>
         { if (clickedMenu) { setClickedMenu(false); } }}>

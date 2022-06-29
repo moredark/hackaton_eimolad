@@ -6,6 +6,7 @@ import eCoal from "./eCoal.png";
 import eOre from "./eWood.png";
 import icp from "./icp.png";
 import eAdit from "./adit.png";
+import lgs from "./lgss.png"
 
 export const Token = ({name, balances, selected, setSelected, setSelectedNFTs, setSelectedWNFTs}) => {
 
@@ -33,7 +34,9 @@ export const Token = ({name, balances, selected, setSelected, setSelectedNFTs, s
                         {name === 'gold' ? <img className={"tokenImg"} src={eGold} alt={name}/> :
                             name === 'coal' ? <img className={"tokenImg"} src={eCoal} alt={name}/> :
                                 name === 'icp' ? <img className={"tokenImg"} src={icp} alt={name}/> :
-                                    name === 'ore' ? <img className={"tokenImg"} src={eOre} alt={name}/> : <img className={"tokenImg"} src={eAdit} alt={name}/>
+                                    name === 'ore' ? <img className={"tokenImg"} src={eOre} alt={name}/> :
+                                        name === 'lgs' ? <img className={"tokenImg"} src={lgs} alt={name}/>
+                                            : <img className={"tokenImg"} src={eAdit} alt={name}/>
                         }
                     </div>
                 </div> : null
