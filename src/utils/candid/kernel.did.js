@@ -1,4 +1,23 @@
 export default ({ IDL }) => {
+  const TokenIdentifier__5 = IDL.Text;
+  const AccountIdentifier__5 = IDL.Text;
+  const User__4 = IDL.Variant({
+    'principal' : IDL.Principal,
+    'address' : AccountIdentifier__5,
+  });
+  const BalanceRequest__4 = IDL.Record({
+    'token' : TokenIdentifier__5,
+    'user' : User__4,
+  });
+  const Balance__4 = IDL.Nat;
+  const CommonError__1__4 = IDL.Variant({
+    'InvalidToken' : TokenIdentifier__5,
+    'Other' : IDL.Text,
+  });
+  const BalanceResponse__4 = IDL.Variant({
+    'ok' : Balance__4,
+    'err' : CommonError__1__4,
+  });
   const TokenIdentifier__4 = IDL.Text;
   const AccountIdentifier__4 = IDL.Text;
   const User__3 = IDL.Variant({
@@ -56,6 +75,9 @@ export default ({ IDL }) => {
     'ok' : Balance__1,
     'err' : CommonError__1__1,
   });
+  const AccountIdentifier__6 = IDL.Vec(IDL.Nat8);
+  const AccountBalanceArgs = IDL.Record({ 'account' : AccountIdentifier__6 });
+  const Tokens = IDL.Record({ 'e8s' : IDL.Nat64 });
   const TokenIdentifier__1 = IDL.Text;
   const AccountIdentifier__1 = IDL.Text;
   const User = IDL.Variant({
@@ -75,10 +97,26 @@ export default ({ IDL }) => {
     'ok' : Balance,
     'err' : CommonError__1,
   });
-  const AccountIdentifier__5 = IDL.Vec(IDL.Nat8);
-  const AccountBalanceArgs = IDL.Record({ 'account' : AccountIdentifier__5 });
-  const Tokens = IDL.Record({ 'e8s' : IDL.Nat64 });
   const TokenIdentifier = IDL.Text;
+  const AccountIdentifier = IDL.Text;
+  const UserData = IDL.Record({
+    'aid' : AccountIdentifier,
+    'chainmail' : IDL.Text,
+    'dialog_count' : IDL.Nat,
+    'body' : IDL.Text,
+    'head' : IDL.Text,
+    'cloak' : IDL.Text,
+    'name' : IDL.Text,
+    'armbands' : IDL.Text,
+    'experience' : IDL.Nat,
+    'shoulder' : IDL.Text,
+    'questStep' : IDL.Nat,
+    'gloves' : IDL.Text,
+    'boots' : IDL.Text,
+    'charId' : TokenIdentifier,
+    'pants' : IDL.Text,
+    'recipe' : IDL.Text,
+  });
   const CurrentEquipment = IDL.Vec(IDL.Nat8);
   const Rases = IDL.Text;
   const RarityRate = IDL.Float64;
@@ -100,7 +138,7 @@ export default ({ IDL }) => {
     'modelCanister' : CanisterIdentifier,
     'weapon' : IDL.Opt(Weapons),
   });
-  const AccountIdentifier = IDL.Text;
+  const UserName = IDL.Record({ 'tid' : TokenIdentifier, 'name' : IDL.Text });
   const SCharacter = IDL.Record({
     'tid' : TokenIdentifier,
     'canister' : CanisterIdentifier,
@@ -162,7 +200,35 @@ export default ({ IDL }) => {
     'tokenInfo' : TokenInfo,
   });
   const TokenRarity = IDL.Record({ 'tokenRarity' : IDL.Text });
+  const CommonError = IDL.Variant({
+    'InvalidToken' : TokenIdentifier,
+    'Other' : IDL.Text,
+  });
+  const Result_3 = IDL.Variant({ 'ok' : IDL.Text, 'err' : CommonError });
   const Result = IDL.Variant({ 'ok' : IDL.Text, 'err' : IDL.Null });
+  const Result_2 = IDL.Variant({ 'ok' : UserData, 'err' : CommonError });
+  const Memo__4 = IDL.Vec(IDL.Nat8);
+  const SubAccount__4 = IDL.Vec(IDL.Nat8);
+  const TransferRequest__4 = IDL.Record({
+    'to' : User__4,
+    'token' : TokenIdentifier__5,
+    'notify' : IDL.Bool,
+    'from' : User__4,
+    'memo' : Memo__4,
+    'subaccount' : IDL.Opt(SubAccount__4),
+    'amount' : Balance__4,
+  });
+  const TransferResponse__4 = IDL.Variant({
+    'ok' : Balance__4,
+    'err' : IDL.Variant({
+      'CannotNotify' : AccountIdentifier__5,
+      'InsufficientBalance' : IDL.Null,
+      'InvalidToken' : TokenIdentifier__5,
+      'Rejected' : IDL.Null,
+      'Unauthorized' : AccountIdentifier__5,
+      'Other' : IDL.Text,
+    }),
+  });
   const Memo__3 = IDL.Vec(IDL.Nat8);
   const SubAccount__3 = IDL.Vec(IDL.Nat8);
   const TransferRequest__3 = IDL.Record({
@@ -254,27 +320,39 @@ export default ({ IDL }) => {
   const Result_1 = IDL.Variant({ 'ok' : IDL.Text, 'err' : IDL.Text });
   return IDL.Service({
     'account_balance_Adit' : IDL.Func(
+        [BalanceRequest__4],
+        [BalanceResponse__4],
+        [],
+      ),
+    'account_balance_eCoal' : IDL.Func(
         [BalanceRequest__3],
         [BalanceResponse__3],
         [],
-    ),
-    'account_balance_eCoal' : IDL.Func(
+      ),
+    'account_balance_eGold' : IDL.Func(
         [BalanceRequest__2],
         [BalanceResponse__2],
         [],
-    ),
-    'account_balance_eGold' : IDL.Func(
+      ),
+    'account_balance_eOre' : IDL.Func(
         [BalanceRequest__1],
         [BalanceResponse__1],
         [],
-    ),
-    'account_balance_eOre' : IDL.Func([BalanceRequest], [BalanceResponse], []),
+      ),
     'account_balance_ic' : IDL.Func([AccountBalanceArgs], [Tokens], []),
+    'account_balance_lgs' : IDL.Func([BalanceRequest], [BalanceResponse], []),
+    'clearUserAccount' : IDL.Func([], [], []),
+    'getAccount' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Tuple(TokenIdentifier, UserData))],
+        ['query'],
+      ),
     'getCharacters' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, CharactersMetadata))],
         ['query'],
-    ),
+      ),
+    'getSigned' : IDL.Func([TokenIdentifier], [IDL.Opt(UserName)], []),
     'getStakeAditFromAID' : IDL.Func([], [IDL.Vec(StakeAdit)], []),
     'getStakeCoalFromAID' : IDL.Func([], [IDL.Vec(StakeCoal)], []),
     'getStakeFromAID' : IDL.Func([], [IDL.Vec(Stake)], []),
@@ -283,70 +361,77 @@ export default ({ IDL }) => {
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, Stake))],
         ['query'],
-    ),
+      ),
     'getStakedAdit' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, StakeAdit))],
         ['query'],
-    ),
+      ),
     'getStakedCoal' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, StakeCoal))],
         ['query'],
-    ),
+      ),
     'getStakedOre' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, StakeOre))],
         ['query'],
-    ),
+      ),
     'getTokenInfo' : IDL.Func([Collections], [TokenInfo], ['query']),
     'getTokenInfoRare' : IDL.Func([Collections], [TokenInfoRarity], ['query']),
     'getTokensRarity' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, TokenRarity))],
         ['query'],
-    ),
+      ),
+    'getUnsigned' : IDL.Func([TokenIdentifier], [IDL.Opt(TokenIdentifier)], []),
     'getWeapons' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(TokenIdentifier, Weapons))],
         ['query'],
-    ),
+      ),
+    'registryAcc' : IDL.Func([TokenIdentifier, IDL.Text], [Result_3], []),
+    'saveProgress' : IDL.Func([UserData], [Result_3], []),
     'sell' : IDL.Func([IDL.Vec(TokenIdentifier)], [Result], []),
     'setStake' : IDL.Func([Stake], [], []),
     'setStakeAdit' : IDL.Func([StakeAdit], [], []),
     'setStakeCoal' : IDL.Func([StakeCoal], [], []),
     'setStakeOre' : IDL.Func([StakeOre], [], []),
-    'this_balance_eAdit' : IDL.Func([], [BalanceResponse__3], []),
-    'this_balance_eCoal' : IDL.Func([], [BalanceResponse__2], []),
-    'this_balance_eGold' : IDL.Func([], [BalanceResponse__1], []),
-    'this_balance_eOre' : IDL.Func([], [BalanceResponse], []),
+    'startGame' : IDL.Func([TokenIdentifier], [Result_2], []),
+    'textToNat' : IDL.Func([IDL.Text], [IDL.Nat], []),
+    'this_balance_eAdit' : IDL.Func([], [BalanceResponse__4], []),
+    'this_balance_eCoal' : IDL.Func([], [BalanceResponse__3], []),
+    'this_balance_eGold' : IDL.Func([], [BalanceResponse__2], []),
+    'this_balance_eOre' : IDL.Func([], [BalanceResponse__1], []),
     'this_balance_ic' : IDL.Func([], [Tokens], []),
+    'this_balance_lgs' : IDL.Func([], [BalanceResponse], []),
     'transferMany' : IDL.Func(
         [AccountIdentifier, IDL.Vec(TokenIdentifier)],
         [Result],
         [],
-    ),
+      ),
     'transfer_eAdit' : IDL.Func(
+        [TransferRequest__4],
+        [TransferResponse__4],
+        [],
+      ),
+    'transfer_eCoal' : IDL.Func(
         [TransferRequest__3],
         [TransferResponse__3],
         [],
-    ),
-    'transfer_eCoal' : IDL.Func(
+      ),
+    'transfer_eGold' : IDL.Func(
         [TransferRequest__2],
         [TransferResponse__2],
         [],
-    ),
-    'transfer_eGold' : IDL.Func(
-        [TransferRequest__1],
-        [TransferResponse__1],
-        [],
-    ),
-    'transfer_eOre' : IDL.Func([TransferRequest], [TransferResponse], []),
+      ),
+    'transfer_eOre' : IDL.Func([TransferRequest__1], [TransferResponse__1], []),
+    'transfer_lgs' : IDL.Func([TransferRequest], [TransferResponse], []),
     'transfer_tokens' : IDL.Func(
         [IDL.Text, AccountIdentifier, IDL.Nat],
         [Result_1],
         [],
-    ),
+      ),
     'unStake' : IDL.Func([TokenIdentifier], [], []),
     'unStakeAdit' : IDL.Func([TokenIdentifier], [], []),
     'unStakeCoal' : IDL.Func([TokenIdentifier], [], []),
@@ -355,7 +440,6 @@ export default ({ IDL }) => {
     'updateCharacter' : IDL.Func([TokenIdentifier, CharactersMetadata], [], []),
     'updateTokenRarity' : IDL.Func([TokenIdentifier, TokenRarity], [], []),
     'updateWeapon' : IDL.Func([TokenIdentifier, Weapons], [], []),
-    'verification' : IDL.Func([], [], []),
     'wrap' : IDL.Func([IDL.Vec(TokenIdentifier)], [Result], []),
   });
 };

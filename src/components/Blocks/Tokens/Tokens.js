@@ -16,6 +16,7 @@ export const Tokens = ({balances, selected, setSelected, setSelectedNFTs, setSel
                 <Token name="coal" balances={balances} selected={selected} setSelected={setSelected} setSelectedNFTs={setSelectedNFTs} setSelectedWNFTs={setSelectedWNFTs}/>
                 <Token name="ore" balances={balances} selected={selected} setSelected={setSelected} setSelectedNFTs={setSelectedNFTs} setSelectedWNFTs={setSelectedWNFTs}/>
                 <Token name="adit" balances={balances} selected={selected} setSelected={setSelected} setSelectedNFTs={setSelectedNFTs} setSelectedWNFTs={setSelectedWNFTs}/>
+                <Token name="lgs" balances={balances} selected={selected} setSelected={setSelected} setSelectedNFTs={setSelectedNFTs} setSelectedWNFTs={setSelectedWNFTs}/>
             </div>
         </div>
     );

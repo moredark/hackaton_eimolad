@@ -17,8 +17,8 @@ export const MenuBtnBlock = ({address}) => {
             <div>
                 <BackButton url="/"/>
                 <div className={classes.menuItems}>
-                    <Link to='/'>
-                        <Button style={{}} active={false} buttonType="middleBtn">Play</Button>
+                    <Link to='/play'>
+                        <Button style={{}} active={true} buttonType="middleBtn">Play</Button>
                     </Link>
                     <Link to='/wallet'>
                         <Button style={{}} active={true} buttonType="middleBtn">Wallet</Button>
