@@ -1,0 +1,221 @@
+.root {
+    background-position: top;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding-bottom: 50px;
+  }
+  
+  .buttons {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .buttons > button {
+    margin: auto;
+    width: 200px !important;
+  }
+  
+  .depth {
+    padding-top: 160px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 70px;
+    letter-spacing: 0.03em;
+    color: #1D1D1D;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  .accounts_container {
+    border: 1px solid red;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .window {
+      width: 800px;
+      height: 600px;
+      padding: 15px;
+      background-color: rgba(13,13,13,0.7);
+      margin: auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+  }
+  
+  .window h4 {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      text-transform: capitalize;
+      background: linear-gradient(130.7deg, #D24328 11.94%, #EC832E 95.54%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+  }
+  
+  .window p {
+      text-align: center;
+      color: white;
+      font-size: 21px;
+  }
+  .border {
+      padding: 15px;
+      height: 100%;
+      border: 1px solid #424141;
+      margin: auto;
+      /*display: flex;*/
+      /*flex-direction: column;*/
+      /*justify-content: center;*/
+      /*align-content: center;*/
+      text-align: center;
+  }
+  .window .cornerLeft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+  }
+  
+  .window .cornerRight{
+      position: absolute;
+      top: 0;
+      right: 0;
+  }
+  
+  .progressBar {
+      border-radius: 3px;
+      width: 60%;
+      border: 2px solid #D34728;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      padding: 2px;
+      margin: auto;
+  }
+  .progressBar>span {
+      border-radius: 2px;
+      margin: auto auto auto 0;
+      height: 20px;
+      background: linear-gradient(130.7deg, #D24328 11.94%, #EC832E 95.54%);
+  }
+  
+  .button {
+    margin: auto;
+  }
+  .address {
+    width: 140px;
+    /*margin: auto auto auto 10px;*/
+    margin: auto;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+  }
+  .address:hover {
+    cursor: pointer;
+  }
+  
+  .address>div {
+    position: absolute;
+    top: -40px;
+    left: 35px;
+    align-content: center;
+    padding: 5px 10px;
+    text-align: center;
+    background-color: #494949;
+    box-shadow: 0 0 5px 3px #141414;
+  }
+
+  .wait {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    transition: 0.5s;
+}
+.wait>img {
+  height: 100px;
+  width: auto;
+  margin: auto;
+}
+  
+  @media screen and (max-width: 1110px) {
+    .root .actions button {
+        width: 150px;
+        font-size: 14px;
+    }
+    .buttons>button{
+      font-size: 16px;
+  }
+  .depth {
+    font-size: 60px;
+  }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .root {
+      padding-top: 40px;
+    }
+    .root .actions>button {
+        width: 80%;
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        margin: auto;
+    }
+  
+    .buttons>button{
+        width: 250px;
+        height: 40px;
+        font-size: 14px;
+    }
+  
+    .address {
+        margin-top: 10px;
+    }
+    .depth {
+      font-size: 50px;
+    }
+  }
+  
+  @media screen and (max-width: 540px) {
+    .root {
+    }
+    .depth{
+      padding-top: 120px;
+    }
+    .buttons>button{
+        width: 220px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .depth {
+      font-size: 40px;
+    }
+  }
